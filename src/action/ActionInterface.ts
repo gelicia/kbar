@@ -15,6 +15,7 @@ export class ActionInterface {
   }
 
   add(actions: Action[]) {
+    console.log('actions interface add', actions);
     for (let i = 0; i < actions.length; i++) {
       const action = actions[i];
       if (action.parent) {

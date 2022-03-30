@@ -23,12 +23,13 @@ export function useStore(props: useStoreProps) {
   } as KBarOptions);
 
   const actionsInterface = React.useMemo(
-    () =>
-      new ActionInterface(props.actions || [], {
+    () => { 
+      console.log('actions interface memo', props.actions);
+      return new ActionInterface(props.actions || [], {
         historyManager: optionsRef.current.enableHistory ? history : undefined,
-      }),
+      });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
+    }, [props.actions]
   );
 
   // TODO: at this point useReducer might be a better approach to managing state.
@@ -48,11 +49,17 @@ export function useStore(props: useStoreProps) {
 
   React.useEffect(() => {
     currState.current = state;
+    console.log('state change');
     publisher.notify();
   }, [state, publisher]);
 
+  React.useEffect(() => {
+    setState(s => {return {...s, actions: actionsInterface.actions}});
+  }, [actionsInterface.actions]);
+
   const registerActions = React.useCallback(
     (actions: Action[]) => {
+      console.log('register actions', actions);
       setState((state) => {
         return {
           ...state,
@@ -69,8 +76,11 @@ export function useStore(props: useStoreProps) {
         });
       };
     },
-    [actionsInterface]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
   );
+
+  console.log('useStore', actionsInterface)
 
   return React.useMemo(() => {
     return {

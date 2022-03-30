@@ -10,6 +10,8 @@ export const KBarContext = React.createContext<IKBarContext>(
 export const KBarProvider: React.FC<KBarProviderProps> = (props) => {
   const contextValue = useStore(props);
 
+  console.log('root context', contextValue.getState());
+
   return (
     <KBarContext.Provider value={contextValue}>
       <InternalEvents />

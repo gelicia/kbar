@@ -124,6 +124,8 @@ export const KBarResults: React.FC<KBarResultsProps> = (props) => {
 
   const pointerMoved = usePointerMovedSinceMount();
 
+  console.log('kbar results', props.items);
+
   return (
     <div
       ref={parentRef}

@@ -40,6 +40,8 @@ export function KBarSearch(
         : defaultText;
     }, [actions, currentRootActionId, props.defaultPlaceholder]);
 
+    console.log('render k bar search');
+
   return (
     <input
       {...props}

@@ -8,10 +8,13 @@ export function useRegisterActions(
 ) {
   const { query } = useKBar();
 
+  console.log('useRegisterActions', actions, dependencies);
+
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const actionsCache = React.useMemo(() => actions, dependencies);
 
   React.useEffect(() => {
+    console.log('register actions hook', query, actionsCache)
     if (!actionsCache.length) {
       return;
     }

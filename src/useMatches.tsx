@@ -28,6 +28,8 @@ export function useMatches() {
     rootActionId: state.currentRootActionId,
   }));
 
+  console.log('usematches', search, actions);
+
   const rootResults = React.useMemo(() => {
     return Object.keys(actions)
       .reduce((acc, actionId) => {
